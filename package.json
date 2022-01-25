@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "@types/fastify-cors": "^2.1.0",
     "@types/puppeteer": "^5.4.4",
     "fastify": "^3.27.0",
     "fastify-cors": "^6.0.2",
-    "puppeteer": "^13.1.1"
+    "puppeteer": "^13.1.1",
+    "typescript": "^4.5.5"
   }
 }
