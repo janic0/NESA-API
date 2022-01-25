@@ -11,7 +11,7 @@ if (!process.env.NESA_PASS) {
 
 export default (): Promise<any> => {
 	return new Promise((res) => {
-		puppeteer.launch().then((browser) => {
+		puppeteer.launch({ args: ["--no-sandbox"] }).then((browser) => {
 			browser.newPage().then((page) => {
 				page
 					.goto(
