@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@types/puppeteer": "^5.4.4",
+    "fastify": "^3.27.0",
+    "puppeteer": "^13.1.1"
+  }
+}
