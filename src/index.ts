@@ -1,7 +1,11 @@
 import Fastify from "fastify";
+import fastifyCors from "fastify-cors";
 import getData from "./getData";
 
 const app = Fastify();
+app.register(fastifyCors, {
+	origin: "*"
+})
 
 let intervalDuration = 120000;
 if (process.env.INTERVAL) {
