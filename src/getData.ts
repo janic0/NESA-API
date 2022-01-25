@@ -1,5 +1,13 @@
 import puppeteer from "puppeteer";
-import creds from "./creds";
+
+if (!process.env.NESA_USER) {
+	console.log("NESA_USER is not set");
+	process.exit(1);
+}
+if (!process.env.NESA_PASS) {
+	console.log("NESA_PASS is not set");
+	process.exit(1);
+}
 
 export default (): Promise<any> => {
 	return new Promise((res) => {
@@ -11,10 +19,16 @@ export default (): Promise<any> => {
 					)
 					.then(() => {
 						page
-							.type("input[type=text][name=login]", creds.username)
+							.type(
+								"input[type=text][name=login]",
+								process.env.NESA_USER as string
+							)
 							.then(() => {
 								page
-									.type("input[type=password][name=passwort]", creds.password)
+									.type(
+										"input[type=password][name=passwort]",
+										process.env.NESA_PASS as string
+									)
 									.then(() => {
 										page.click("input[type=submit][value=Login]").then(() => {
 											page
