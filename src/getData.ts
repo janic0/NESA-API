@@ -97,44 +97,48 @@ export default (): Promise<any> => {
 																});
 															rows[i + 1]
 																.$$eval<any>("td>table>tbody>tr", (elems) => {
-																	const keys = Array.from(
-																		elems[0].children
-																	).map((elm: any) =>
-																		elm
-																			? elm.children
-																				? elm.children[0] &&
-																				  elm.children[0].children &&
-																				  elm.children[0].children[0]
-																					? elm.children[0].children[0].innerHTML.toLowerCase()
-																					: elm.children[0].innerHTML.toLowerCase()
+																	if (elems[0]) {
+																		const keys = Array.from(
+																			elems[0].children
+																		).map((elm: any) =>
+																			elm
+																				? elm.children
+																					? elm.children[0] &&
+																					  elm.children[0].children &&
+																					  elm.children[0].children[0]
+																						? elm.children[0].children[0].innerHTML.toLowerCase()
+																						: elm.children[0].innerHTML.toLowerCase()
+																					: ""
 																				: ""
-																			: ""
-																	);
-																	const values: any[] = [];
-																	elems
-																		.slice(1, elems.length - 1)
-																		.forEach((elem) => {
-																			if (elem && elem.children) {
-																				const celem: any = {};
-																				Array.from(
-																					elem.children as any
-																				).forEach((elm: any, i) => {
-																					if (elm) {
-																						celem[keys[i]] =
-																							elm.childElementCount
-																								? elm.innerHTML
-																										.slice(
-																											0,
-																											elm.innerHTML.indexOf("<")
-																										)
-																										.trim()
-																								: elm.innerHTML.trim();
-																					}
-																				});
-																				values.push(celem);
-																			}
-																		});
-																	return values;
+																		);
+																		const values: any[] = [];
+																		elems
+																			.slice(1, elems.length - 1)
+																			.forEach((elem) => {
+																				if (elem && elem.children) {
+																					const celem: any = {};
+																					Array.from(
+																						elem.children as any
+																					).forEach((elm: any, i) => {
+																						if (elm) {
+																							celem[keys[i]] =
+																								elm.childElementCount
+																									? elm.innerHTML
+																											.slice(
+																												0,
+																												elm.innerHTML.indexOf(
+																													"<"
+																												)
+																											)
+																											.trim()
+																									: elm.innerHTML.trim();
+																						}
+																					});
+																					values.push(celem);
+																				}
+																			});
+																		return values;
+																	} else return [];
 																})
 																.then((elems) => {
 																	items = elems;
