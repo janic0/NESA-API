@@ -32,7 +32,7 @@ export default (): Promise<any> => {
 									.then(() => {
 										page.click("input[type=submit][value=Login]").then(() => {
 											page
-												.waitForNavigation({ timeout: 10000 })
+												.waitForNavigation({ timeout: 30000 })
 												.catch((err) => {
 													browser.close();
 													console.log(err);
