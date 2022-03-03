@@ -12,3 +12,7 @@ Access your grades in NESA-SG through a http server.
 ## Environment Variables
 - NESA_USER
 - NESA_PASS
+
+# How to run
+- `npm install`
+- `NESA_USER="" NESA_PASS="" ts-node src/`
